@@ -1,0 +1,2264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Happy Birthday - Guiding Light</title>
+
+<style>
+
+/* ================================
+   GLOBAL RESET
+================================ */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#000;
+    color:white;
+    font-family:"Georgia", serif;
+    overflow-x:hidden;
+}
+
+
+/* ================================
+   CANVAS BACKGROUND
+================================ */
+
+#spaceCanvas{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:-1;
+}
+
+
+/* ================================
+   CINEMATIC INTRO
+================================ */
+
+#intro{
+    position:fixed;
+    inset:0;
+    background:#000;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    z-index:9999;
+    padding:30px;
+}
+
+.intro-text{
+    position:absolute;
+    opacity:0;
+    font-size:clamp(1.2rem,4vw,2rem);
+    letter-spacing:1px;
+    color:#D4AF37;
+    filter:blur(15px);
+    animation:introFade 5s forwards;
+}
+
+
+@keyframes introFade{
+
+0%{
+opacity:0;
+filter:blur(20px);
+transform:scale(.9);
+}
+
+25%{
+opacity:1;
+filter:blur(0);
+}
+
+75%{
+opacity:1;
+}
+
+100%{
+opacity:0;
+filter:blur(20px);
+transform:scale(1.1);
+}
+
+}
+
+
+/* ================================
+   LOADER TERMINAL
+================================ */
+
+#loader{
+display:none;
+min-height:100vh;
+justify-content:center;
+align-items:center;
+padding:20px;
+}
+
+
+.terminal{
+
+width:min(600px,95%);
+background:rgba(255,255,255,.08);
+border:1px solid rgba(212,175,55,.5);
+backdrop-filter:blur(15px);
+border-radius:20px;
+padding:30px;
+box-shadow:
+0 0 40px rgba(212,175,55,.2);
+}
+
+
+.terminal h2{
+
+color:#D4AF37;
+margin-bottom:20px;
+font-size:1.5rem;
+
+}
+
+
+#bootText{
+
+line-height:2;
+font-family:monospace;
+color:#fff;
+
+}
+
+
+.progress-container{
+
+height:15px;
+background:#222;
+border-radius:20px;
+overflow:hidden;
+margin-top:25px;
+
+}
+
+
+.progress{
+
+height:100%;
+width:0%;
+background:
+linear-gradient(90deg,#D4AF37,#fff,#D4AF37);
+
+box-shadow:
+0 0 20px #D4AF37;
+
+transition:width .2s;
+
+}
+
+
+.status{
+
+margin-top:20px;
+font-family:monospace;
+color:#D4AF37;
+
+}
+
+
+.gold-button{
+
+margin-top:25px;
+padding:15px 35px;
+
+border:none;
+border-radius:50px;
+
+background:
+linear-gradient(45deg,#D4AF37,#fff0a0);
+
+color:#000;
+
+font-weight:bold;
+font-size:1rem;
+
+cursor:pointer;
+
+box-shadow:
+0 0 30px rgba(212,175,55,.7);
+
+transition:.4s;
+
+}
+
+
+.gold-button:hover{
+
+transform:scale(1.08);
+
+}
+
+
+/* ================================
+   MAIN WEBSITE
+================================ */
+
+
+#main{
+
+display:none;
+
+}
+
+
+section{
+
+min-height:100vh;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+padding:40px 20px;
+
+text-align:center;
+
+}
+
+
+
+.glass{
+
+background:
+rgba(255,255,255,.08);
+
+border:
+
+1px solid rgba(212,175,55,.3);
+
+backdrop-filter:
+
+blur(20px);
+
+border-radius:30px;
+
+padding:40px;
+
+width:min(900px,95%);
+
+box-shadow:
+
+0 0 40px rgba(212,175,55,.15);
+
+}
+
+
+/* ================================
+ HERO
+================================ */
+
+
+.hero small{
+
+color:#D4AF37;
+
+letter-spacing:3px;
+
+}
+
+
+.hero h1{
+
+font-size:
+
+clamp(2.5rem,8vw,5rem);
+
+margin:20px 0;
+
+background:
+
+linear-gradient(
+45deg,
+#fff,
+#D4AF37
+);
+
+-webkit-background-clip:text;
+
+color:transparent;
+
+animation:
+
+float 5s infinite;
+
+}
+
+
+.hero p{
+
+font-size:
+
+clamp(1.2rem,4vw,2rem);
+
+line-height:1.8;
+
+}
+
+
+@keyframes float{
+
+50%{
+
+transform:translateY(-15px);
+
+}
+
+}
+
+
+/* ================================
+ GOLD GLOW
+================================ */
+
+
+.glow{
+
+animation:pulse 3s infinite;
+
+}
+
+
+@keyframes pulse{
+
+50%{
+
+text-shadow:
+
+0 0 30px #D4AF37;
+
+}
+
+}
+
+
+
+/* ================================
+ MOBILE
+================================ */
+
+@media(max-width:600px){
+
+.glass{
+
+padding:25px;
+
+}
+
+
+.terminal{
+
+padding:20px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<canvas id="spaceCanvas"></canvas>
+
+
+<!-- ================================
+INTRO
+================================ -->
+
+<div id="intro">
+
+<div class="intro-text">
+Some people become family by blood...
+</div>
+
+    
+<div class="intro-text">
+Some become family through love...
+</div>
+
+    
+<div class="intro-text">
+Some become sister's through sacrifice...
+</div>
+
+</div>
+
+
+
+<!-- ================================
+LOADER
+================================ -->
+
+<div id="loader">
+
+<div class="terminal">
+
+<h2>
+SYSTEM BOOT SEQUENCE
+</h2>
+
+
+<div id="bootText"></div>
+
+
+<div class="progress-container">
+
+<div class="progress" id="progress"></div>
+
+</div>
+
+
+<div class="status">
+
+SYSTEM STATUS:
+<br>
+
+EXPERIENCE READY
+
+</div>
+
+
+<button class="gold-button"
+onclick="beginExperience()">
+
+Begin Experience
+
+</button>
+
+
+</div>
+
+</div>
+
+
+
+
+
+<!-- ================================
+MAIN EXPERIENCE
+================================ -->
+
+
+<div id="main">
+
+
+<section class="hero">
+
+
+<div class="glass">
+
+
+<small>
+AN INTERACTIVE GRATITUDE CHRONICLE
+</small>
+
+
+<h1>
+Happy Birthday
+<br>
+To My Guiding Light
+</h1>
+
+
+<p class="glow">
+
+A Sister.
+<br>
+A Mentor.
+<br>
+A Blessing.
+
+</p>
+
+
+<button class="gold-button"
+onclick="scrollNext()">
+
+Enter Memory
+
+</button>
+
+
+</div>
+
+
+</section>
+
+
+<section>
+
+<div class="glass">
+
+<h1>
+The Story Begins...
+</h1>
+
+<p>
+
+A journey of love, sacrifice, guidance and gratitude.
+
+</p>
+
+
+</div>
+
+</section>
+
+
+</div>
+
+
+
+
+
+<script>
+
+
+/* ================================
+INTRO CONTROL
+================================ */
+
+
+let introTexts =
+document.querySelectorAll(".intro-text");
+
+
+introTexts.forEach((text,index)=>{
+
+text.style.animationDelay =
+(index*5)+"s";
+
+});
+
+
+setTimeout(()=>{
+
+document.getElementById("intro").style.display="none";
+
+startLoader();
+
+},16000);
+
+
+
+
+
+/* ================================
+LOADER
+================================ */
+
+
+function startLoader(){
+
+let loader=
+document.getElementById("loader");
+
+loader.style.display="flex";
+
+
+let messages=[
+
+"Booting Gratitude Engine...",
+"Booting Memories...",
+"Booting Love...",
+"Booting Guidance...",
+"Booting Mentorship...",
+"Booting Kindness...",
+"Booting Sacrifice..."
+
+];
+
+
+let box=
+document.getElementById("bootText");
+
+
+let i=0;
+
+
+let interval=setInterval(()=>{
+
+
+if(i<messages.length){
+
+box.innerHTML +=
+messages[i]+"<br>";
+
+i++;
+
+}
+
+else{
+
+clearInterval(interval);
+
+startProgress();
+
+}
+
+
+},900);
+
+
+
+}
+
+
+
+
+function startProgress(){
+
+
+let progress=
+document.getElementById("progress");
+
+
+let value=0;
+
+
+let timer=setInterval(()=>{
+
+
+value++;
+
+progress.style.width=value+"%";
+
+
+if(value>=100){
+
+clearInterval(timer);
+
+}
+
+
+},30);
+
+
+}
+
+
+
+
+
+function beginExperience(){
+
+
+document.getElementById("loader")
+.style.display="none";
+
+
+document.getElementById("main")
+.style.display="block";
+
+
+}
+
+
+function scrollNext(){
+
+window.scrollTo({
+
+top:window.innerHeight,
+
+behavior:"smooth"
+
+});
+
+}
+
+
+</script>
+  <!-- ================================
+CANVAS CINEMATIC PARTICLE ENGINE
+================================ -->
+
+<script>
+
+const canvas = document.getElementById("spaceCanvas");
+const ctx = canvas.getContext("2d");
+
+let particles = [];
+
+function resizeCanvas(){
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+}
+
+resizeCanvas();
+
+window.addEventListener(
+"resize",
+resizeCanvas
+);
+
+
+
+class Particle{
+
+constructor(){
+
+this.x=Math.random()*canvas.width;
+this.y=Math.random()*canvas.height;
+
+this.size=Math.random()*2+1;
+
+this.speedX=(Math.random()-.5)*0.5;
+this.speedY=(Math.random()-.5)*0.5;
+
+this.alpha=Math.random();
+
+}
+
+
+update(){
+
+this.x+=this.speedX;
+this.y+=this.speedY;
+
+
+if(this.x<0||this.x>canvas.width)
+this.speedX*=-1;
+
+
+if(this.y<0||this.y>canvas.height)
+this.speedY*=-1;
+
+
+}
+
+
+draw(){
+
+ctx.beginPath();
+
+ctx.fillStyle=
+`rgba(212,175,55,${this.alpha})`;
+
+ctx.shadowBlur=20;
+
+ctx.shadowColor="#D4AF37";
+
+ctx.arc(
+this.x,
+this.y,
+this.size,
+0,
+Math.PI*2
+);
+
+ctx.fill();
+
+
+}
+
+
+}
+
+
+for(let i=0;i<120;i++){
+
+particles.push(
+new Particle()
+);
+
+}
+
+
+
+function animateSpace(){
+
+ctx.clearRect(
+0,
+0,
+canvas.width,
+canvas.height
+);
+
+
+particles.forEach(p=>{
+
+p.update();
+p.draw();
+
+});
+
+
+requestAnimationFrame(
+animateSpace
+);
+
+
+}
+
+
+animateSpace();
+
+
+</script>
+
+
+
+
+
+<!-- ================================
+MUSIC EXPERIENCE
+================================ -->
+
+
+<section>
+
+<div class="glass">
+
+
+<h1>
+Emotional Soundtrack
+</h1>
+
+
+<p>
+A melody for memories.
+</p>
+
+
+<audio id="music"
+loop>
+
+<!-- Replace this audio source with your own music -->
+
+<source src="together.m4a"
+type="audio/mpeg">
+
+</audio>
+
+
+
+<button class="gold-button"
+onclick="playMusic()">
+
+Play
+
+</button>
+
+
+<button class="gold-button"
+onclick="pauseMusic()">
+
+Pause
+
+</button>
+
+
+<br><br>
+
+
+<input 
+type="range"
+min="0"
+max="1"
+step="0.01"
+value="0.5"
+oninput="changeVolume(this.value)"
+>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+<script>
+
+
+const music=
+document.getElementById("music");
+
+
+music.volume=.5;
+
+
+function playMusic(){
+
+music.play();
+
+}
+
+
+function pauseMusic(){
+
+music.pause();
+
+}
+
+
+function changeVolume(value){
+
+music.volume=value;
+
+}
+
+
+</script>
+
+
+
+
+
+
+<!-- ================================
+CUSTOM CURSOR
+================================ -->
+
+
+<div id="cursor"></div>
+
+<div id="cursorGlow"></div>
+
+
+
+<style>
+
+
+@media(min-width:800px){
+
+
+body{
+
+cursor:none;
+
+}
+
+
+#cursor{
+
+position:fixed;
+
+width:18px;
+
+height:18px;
+
+background:#D4AF37;
+
+border-radius:50%;
+
+pointer-events:none;
+
+z-index:99999;
+
+box-shadow:
+
+0 0 20px #D4AF37;
+
+}
+
+
+
+#cursorGlow{
+
+position:fixed;
+
+width:60px;
+
+height:60px;
+
+border-radius:50%;
+
+background:
+
+rgba(212,175,55,.2);
+
+pointer-events:none;
+
+z-index:99998;
+
+filter:blur(10px);
+
+}
+
+
+}
+
+
+</style>
+
+
+
+<script>
+
+
+const cursor=
+document.getElementById("cursor");
+
+
+const glow=
+document.getElementById("cursorGlow");
+
+
+document.addEventListener(
+"mousemove",
+(e)=>{
+
+
+if(cursor){
+
+cursor.style.left=
+e.clientX+"px";
+
+
+cursor.style.top=
+e.clientY+"px";
+
+
+glow.style.left=
+e.clientX-20+"px";
+
+
+glow.style.top=
+e.clientY-20+"px";
+
+
+}
+
+
+});
+
+
+</script>
+
+
+
+
+
+
+
+<!-- ================================
+PICTURE TRIBUTE SECTION
+================================ -->
+
+
+<section>
+
+
+<div class="glass reveal">
+
+
+<div class="photo-frame">
+
+
+<img src="tositao.jpg"
+alt="Sisters Image">
+
+
+</div>
+
+
+<h1>
+The Backbone Of Our Journey
+</h1>
+
+
+<p>
+The Lady We Celebrate Today
+</p>
+
+
+</div>
+
+
+</section>
+
+
+
+
+<style>
+
+
+.photo-frame{
+
+width:min(350px,90%);
+
+margin:auto;
+
+padding:15px;
+
+border-radius:30px;
+
+border:
+
+2px solid #D4AF37;
+
+background:
+
+rgba(255,255,255,.1);
+
+box-shadow:
+
+0 0 40px rgba(212,175,55,.5);
+
+overflow:hidden;
+
+animation:
+zoomPicture 8s infinite;
+
+}
+
+
+
+.photo-frame img{
+
+width:100%;
+
+border-radius:20px;
+
+display:block;
+
+}
+
+
+
+@keyframes zoomPicture{
+
+
+50%{
+
+transform:scale(1.05);
+
+}
+
+
+}
+
+
+</style>
+
+
+
+
+
+
+
+<!-- ================================
+FATHER TRIBUTE
+================================ -->
+
+
+<section>
+
+
+<div class="glass reveal">
+
+
+<h1>
+A Tribute From The Heart
+</h1>
+
+
+<p class="tribute">
+
+
+Not because we share the same blood...
+<br><br>
+
+But because you chose to love me like your own.
+<br><br>
+
+You stood by me.
+<br><br>
+
+Corrected me.
+<br><br>
+
+Prayed for me.
+<br><br>
+
+Believed in me.
+<br><br>
+
+Supported me.
+<br><br>
+
+For that...
+<br><br>
+
+I will forever remain grateful.
+
+
+</p>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<!-- ================================
+SCROLL REVEAL SYSTEM
+================================ -->
+
+
+<style>
+
+
+.reveal{
+
+opacity:0;
+
+transform:
+translateY(80px);
+
+transition:
+
+1.5s ease;
+
+
+}
+
+
+.reveal.active{
+
+opacity:1;
+
+transform:
+translateY(0);
+
+}
+
+
+
+</style>
+
+
+
+
+<script>
+
+
+const reveals=
+document.querySelectorAll(".reveal");
+
+
+function revealScroll(){
+
+
+reveals.forEach(
+(item)=>{
+
+
+let position=
+item.getBoundingClientRect()
+.top;
+
+
+if(position <
+window.innerHeight-100){
+
+item.classList.add(
+"active"
+);
+
+}
+
+
+});
+
+
+}
+
+
+window.addEventListener(
+"scroll",
+revealScroll
+);
+
+
+revealScroll();
+
+
+</script>
+    <!-- ================================
+DEVELOPER TERMINAL SECTION
+================================ -->
+
+
+<section>
+
+
+<div class="glass reveal">
+
+
+<h1>
+Developer Terminal
+</h1>
+
+
+<div class="dev-terminal">
+
+
+<span id="codeTyping"></span>
+
+
+</div>
+
+
+<div class="skill">
+
+<p>
+Wisdom
+</p>
+
+<div class="bar">
+<div id="wisdom"></div>
+</div>
+
+</div>
+
+
+
+<div class="skill">
+
+<p>
+Kindness
+</p>
+
+<div class="bar">
+<div id="kindness"></div>
+</div>
+
+</div>
+
+
+
+
+<div class="skill">
+
+<p>
+Guidance
+</p>
+
+<div class="bar">
+<div id="guidance"></div>
+</div>
+
+</div>
+
+
+
+<h2 class="gold-text">
+
+SYSTEM STATUS:
+
+<br>
+
+LEGEND ONLINE
+
+</h2>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<style>
+
+
+.dev-terminal{
+
+background:#050505;
+
+border:
+
+1px solid #D4AF37;
+
+border-radius:20px;
+
+padding:25px;
+
+text-align:left;
+
+font-family:monospace;
+
+color:#D4AF37;
+
+min-height:180px;
+
+}
+
+
+
+.skill{
+
+margin-top:25px;
+
+}
+
+
+
+.bar{
+
+height:12px;
+
+background:#222;
+
+border-radius:20px;
+
+overflow:hidden;
+
+}
+
+
+.bar div{
+
+height:100%;
+
+width:0%;
+
+background:
+
+linear-gradient(
+90deg,
+#D4AF37,
+white
+);
+
+transition:3s;
+
+}
+
+
+.gold-text{
+
+margin-top:30px;
+
+color:#D4AF37;
+
+}
+
+</style>
+
+
+
+
+
+<script>
+
+
+let codeLines=[
+
+"class Uncle:",
+
+"kindness = infinity",
+
+"wisdom = infinity",
+
+"generosity = infinity",
+
+"mentorship = infinity"
+
+];
+
+
+let codeBox=
+document.getElementById(
+"codeTyping"
+);
+
+
+let line=0;
+
+
+function typeCode(){
+
+
+if(line<codeLines.length){
+
+
+codeBox.innerHTML +=
+codeLines[line]+"<br>";
+
+line++;
+
+
+setTimeout(
+typeCode,
+900
+);
+
+
+}
+
+else{
+
+
+setTimeout(()=>{
+
+
+document.getElementById("wisdom")
+.style.width="100%";
+
+
+document.getElementById("kindness")
+.style.width="100%";
+
+
+document.getElementById("guidance")
+.style.width="100%";
+
+
+},500);
+
+
+}
+
+
+}
+
+
+setTimeout(
+typeCode,
+3000
+);
+
+
+</script>
+
+
+
+
+
+
+
+
+
+<!-- ================================
+TIMELINE
+================================ -->
+
+
+<section>
+
+
+<div class="glass">
+
+
+<h1>
+A Journey Of Impact
+</h1>
+
+
+
+<div class="timeline">
+
+
+<div class="card">
+Mentor
+</div>
+
+
+<div class="card">
+Sister
+</div>
+
+
+<div class="card">
+Supporter
+</div>
+
+
+<div class="card">
+Motivator
+</div>
+
+
+<div class="card">
+Role Model
+</div>
+
+
+<div class="card">
+Guide
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<style>
+
+
+.timeline{
+
+border-left:
+
+3px solid #D4AF37;
+
+padding-left:30px;
+
+}
+
+
+.card{
+
+margin:40px 0;
+
+padding:25px;
+
+background:
+
+rgba(255,255,255,.08);
+
+border-radius:20px;
+
+border:
+
+1px solid rgba(212,175,55,.4);
+
+font-size:1.3rem;
+
+transition:.8s;
+
+}
+
+
+
+.card:hover{
+
+transform:
+translateX(20px);
+
+box-shadow:
+
+0 0 30px #D4AF37;
+
+}
+
+
+</style>
+
+
+
+
+
+
+
+
+<!-- ================================
+STATISTICS
+================================ -->
+
+
+<section>
+
+
+<div class="glass">
+
+
+<h1>
+Infinite Blessings
+</h1>
+
+
+<div class="stats">
+
+
+<div>
+
+<h2 data-count="0">
+∞
+</h2>
+
+<p>
+Years Of Wisdom
+</p>
+
+</div>
+
+
+
+<div>
+
+<h2 data-count="500">
+0
+</h2>
+
+<p>
+Lives Impacted
+</p>
+
+</div>
+
+
+
+
+<div>
+
+<h2>
+∞
+</h2>
+
+<p>
+Prayers Made
+</p>
+
+</div>
+
+
+
+<div>
+
+<h2>
+∞
+</h2>
+
+<p>
+Love Given
+</p>
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<style>
+
+
+.stats{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(150px,1fr));
+
+gap:30px;
+
+}
+
+
+
+.stats h2{
+
+font-size:3rem;
+
+color:#D4AF37;
+
+}
+
+
+
+</style>
+
+
+
+
+
+
+<script>
+
+
+let counted=false;
+
+
+window.addEventListener(
+"scroll",
+()=>{
+
+
+let section=
+document.querySelector(".stats");
+
+
+if(
+section &&
+section.getBoundingClientRect().top <
+window.innerHeight &&
+!counted
+){
+
+
+counted=true;
+
+
+let counter=
+section.querySelector("[data-count]");
+
+
+let target=500;
+
+let num=0;
+
+
+let timer=setInterval(()=>{
+
+
+num+=10;
+
+
+counter.innerHTML=num+"+";
+
+
+if(num>=target){
+
+clearInterval(timer);
+
+}
+
+
+},50);
+
+
+
+}
+
+
+});
+
+
+</script>
+
+
+
+
+
+
+
+
+<!-- ================================
+PROMISE SECTION
+================================ -->
+
+
+<section>
+
+
+<div class="glass">
+
+
+<h1 class="promise">
+
+
+"I pray to become the man you have always believed I could be."
+
+
+</h1>
+
+
+</div>
+
+
+</section>
+
+
+
+
+<style>
+
+
+.promise{
+
+color:#D4AF37;
+
+font-size:
+
+clamp(1.5rem,5vw,3rem);
+
+line-height:1.6;
+
+text-shadow:
+
+0 0 30px #D4AF37;
+
+}
+
+
+</style>
+
+
+
+
+
+
+
+
+
+<!-- ================================
+DUA SECTION
+================================ -->
+
+
+<section>
+
+
+<div class="glass reveal">
+
+
+<h1>
+حفظك الله ورعاك
+</h1>
+
+
+<p class="dua">
+
+
+May Allah preserve you.
+<br><br>
+
+Bless your health.
+<br><br>
+
+Increase your provision.
+<br><br>
+
+Accept every good deed.
+<br><br>
+
+Reward every sacrifice.
+<br><br>
+
+Grant you happiness in this life and the next.
+<br><br>
+
+Ameen.
+
+
+</p>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<style>
+
+
+.dua{
+
+font-size:1.2rem;
+
+line-height:2;
+
+}
+
+
+
+</style>
+
+
+
+
+
+
+
+
+
+<!-- ================================
+FINAL CELEBRATION
+================================ -->
+
+
+<section id="final">
+
+
+<div class="glass">
+
+
+<h1>
+
+Happy Birthday.
+
+</h1>
+
+
+<p>
+
+Thank you... for believing in me.
+
+<br><br>
+
+
+Signed With Love
+
+<br><br>
+
+
+<strong>
+Martins DeMatrix
+</strong>
+
+
+</p>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<style>
+
+
+#final h1{
+
+font-size:
+
+clamp(3rem,8vw,6rem);
+
+color:#D4AF37;
+
+animation:
+
+float 4s infinite;
+
+}
+
+
+</style>
+
+
+
+
+
+
+
+
+<!-- ================================
+CONFETTI ENGINE
+================================ -->
+
+
+<script>
+
+
+let confetti=[];
+
+
+function createConfetti(){
+
+
+for(let i=0;i<150;i++){
+
+
+confetti.push({
+
+x:window.innerWidth/2,
+
+y:window.innerHeight/2,
+
+size:Math.random()*8+3,
+
+speedX:
+(Math.random()-.5)*10,
+
+speedY:
+Math.random()*-10-5,
+
+life:200
+
+});
+
+
+}
+
+
+animateConfetti();
+
+
+}
+
+
+
+
+
+function animateConfetti(){
+
+
+let layer=
+document.createElement("canvas");
+
+
+layer.style.position="fixed";
+
+layer.style.inset="0";
+
+layer.style.pointerEvents="none";
+
+layer.style.zIndex="99999";
+
+
+document.body.appendChild(layer);
+
+
+
+let c=
+layer.getContext("2d");
+
+
+function frame(){
+
+
+c.clearRect(
+0,
+0,
+layer.width=innerWidth,
+layer.height=innerHeight
+);
+
+
+
+confetti.forEach(p=>{
+
+
+p.x+=p.speedX;
+
+p.y+=p.speedY;
+
+p.speedY+=.2;
+
+p.life--;
+
+
+c.fillStyle=
+Math.random()>.5?
+"#D4AF37":
+"#ffffff";
+
+
+c.fillRect(
+p.x,
+p.y,
+p.size,
+p.size
+);
+
+
+});
+
+
+
+confetti=
+confetti.filter(
+p=>p.life>0
+);
+
+
+
+if(confetti.length)
+
+requestAnimationFrame(frame);
+
+
+}
+
+
+
+frame();
+
+
+}
+
+
+
+
+let final=
+document.getElementById("final");
+
+
+window.addEventListener(
+"scroll",
+()=>{
+
+
+if(
+final.getBoundingClientRect().top <
+window.innerHeight/2
+){
+
+createConfetti();
+
+}
+
+
+});
+
+
+</script>
+
+
+
+
+
+</body>
+
+</html>
